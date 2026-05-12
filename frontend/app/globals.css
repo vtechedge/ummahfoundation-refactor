@@ -1,0 +1,131 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #FAF7F0;
+    --foreground: #1A1A1A;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-size: 17px;
+    overflow-x: hidden;
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-feature-settings: "ss01", "cv11", "calt";
+    letter-spacing: -0.005em;
+  }
+
+  /* Plus Jakarta Sans display — lnum for tabular numbers, ss01 for stylistic alt */
+  .font-display {
+    font-feature-settings: "lnum", "ss01";
+  }
+
+  ::selection {
+    background: rgba(201, 162, 39, 0.35);
+    color: #0D3C1D;
+  }
+}
+
+@layer components {
+  .container-tight {
+    @apply mx-auto w-full max-w-[1240px] px-5 sm:px-8;
+  }
+
+  .glass {
+    @apply bg-white/70 backdrop-blur-xl border border-white/60;
+  }
+
+  .card-soft {
+    @apply bg-white rounded-2xl shadow-card border border-islamic-50;
+  }
+
+  /* Editorial eyebrow — small caps, wide tracking, with a small number prefix */
+  .eyebrow {
+    @apply inline-flex items-center gap-3 text-[13px] uppercase tracking-[0.22em] text-muted font-semibold;
+  }
+  .eyebrow-rule::before {
+    content: "";
+    @apply inline-block w-8 h-px bg-islamic-300;
+  }
+
+  .section-label {
+    @apply inline-flex items-center gap-2 text-[13px] font-semibold uppercase tracking-[0.22em] text-islamic-600;
+  }
+
+  /* Display headings — Plus Jakarta Sans, bold weights for visual impact.
+     Mobile sizes are conservative to prevent overflow on 375px viewports. */
+  .heading-xl {
+    @apply font-sans font-extrabold text-[2.5rem] sm:text-[4rem] md:text-[5rem] lg:text-[6.75rem] leading-[1] tracking-[-0.03em] text-ink;
+  }
+  .heading-lg {
+    @apply font-sans font-bold text-[2rem] sm:text-[2.75rem] lg:text-[3.75rem] leading-[1.05] tracking-[-0.025em] text-ink;
+  }
+  .heading-md {
+    @apply font-sans font-bold text-[1.75rem] sm:text-[2rem] leading-[1.1] tracking-[-0.02em] text-ink;
+  }
+
+  /* An editorial lede — italic sans lead paragraph */
+  .lede {
+    @apply font-sans italic font-medium text-[1.35rem] sm:text-[1.6rem] leading-[1.5] text-ink/80 tracking-[-0.005em];
+  }
+
+  /* Section rhythm — 8px grid, ceiling at 128px. Editorial breath without empty rooms. */
+  .section-pad {
+    @apply py-20 sm:py-24 lg:py-32;
+  }
+
+  .divider-gold {
+    background: linear-gradient(90deg, transparent, #C9A227 50%, transparent);
+    height: 1px;
+  }
+
+  /* Thin hairline divider used between editorial rows */
+  .hairline {
+    @apply h-px w-full bg-islamic-100;
+  }
+
+  /* Number labels like 01, 02 — monospace-ish small caps */
+  .num {
+    @apply font-sans text-[13px] font-semibold uppercase tracking-[0.2em] text-islamic-700 tabular-nums;
+  }
+
+  /* Link with subtle animated underline — used instead of secondary buttons */
+  .link-arrow {
+    @apply inline-flex items-center gap-2 text-sm font-medium text-ink/90 hover:text-islamic-600 transition-colors;
+  }
+  .link-arrow::after {
+    content: "→";
+    @apply transition-transform;
+  }
+  .link-arrow:hover::after {
+    @apply translate-x-1;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .mask-fade-b {
+    mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  }
+
+  /* Islamic star pattern overlay */
+  .pattern-islamic {
+    background-image:
+      radial-gradient(circle at 50% 50%, rgba(201,162,39,0.08) 2px, transparent 3px),
+      radial-gradient(circle at 0 0, rgba(30,122,58,0.06) 2px, transparent 3px),
+      radial-gradient(circle at 100% 100%, rgba(30,122,58,0.06) 2px, transparent 3px);
+    background-size: 32px 32px, 32px 32px, 32px 32px;
+    background-position: 0 0, 0 0, 16px 16px;
+  }
+}
