@@ -30,12 +30,11 @@ const TRUST_ITEMS = [
 
 export function TrustBar() {
   return (
-    <div className="bg-islamic-50">
+    <div className="bg-islamic-50 border-t border-b border-islamic-100">
       <div className="container-tight py-6">
-        <div className="md:grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {TRUST_ITEMS.map(({ icon: Icon, label, sub }, i) => (
-            <div key={label} className={`flex items-start gap-3 ${i !== TRUST_ITEMS.length - 1 ? "mb-[26px] md:mb-0" : ""
-              }`}>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          {TRUST_ITEMS.map(({ icon: Icon, label, sub }) => (
+            <div key={label} className="flex items-start gap-3">
               <div className="flex-shrink-0 h-8 w-8 bg-islamic-600 text-white rounded flex items-center justify-center">
                 <Icon className="h-4 w-4" />
               </div>
