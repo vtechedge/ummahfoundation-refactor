@@ -6,7 +6,7 @@ import { SectionHeader } from "@/components/shared/Section";
 
 export function AboutSection({ showHeader = true }: { showHeader?: boolean }) {
   return (
-    <section id="about" className="bg-cream py-12 sm:py-16 lg:py-20 border-t border-gray-100">
+    <section id="about" className="bg-white py-12 sm:py-16 lg:py-20 border-t border-gray-100">
       <div className="container-tight">
 
         {showHeader && (

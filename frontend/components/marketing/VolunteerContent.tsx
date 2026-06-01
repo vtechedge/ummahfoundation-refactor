@@ -6,7 +6,6 @@ import { ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { volunteerRoles } from "@/lib/mock-data";
 import { buttonVariants } from "@/components/ui/button";
-import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
 import { cn } from "@/lib/utils";
 
 export function VolunteerContent() {
@@ -22,13 +21,13 @@ export function VolunteerContent() {
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
         <div>
-          <SectionEyebrow className="text-gold-300/80" diamondClassName="text-gold-550 mr-2" underlineWidth="w-[100px]">
-            Get involved
-          </SectionEyebrow>
+          <p className="text-[11px] font-bold uppercase tracking-widest text-gold-300">
+            <span className="mr-1.5 opacity-70">◆</span>Get involved
+          </p>
           <h2 className="mt-0.5 text-2xl sm:text-3xl font-bold text-cream font-sans">
             Volunteer with Ummah Foundation
           </h2>
-          <p className="mt-1 text-[15px] text-white/65">
+          <p className="mt-1 text-[15px] text-white/65 max-w-xs">
             Your time is sadaqah. We have a role for every skill.
           </p>
         </div>

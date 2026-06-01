@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { campaigns } from "@/lib/mock-data";
-import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
 
 type Stat = {
   value: number;
@@ -78,40 +77,39 @@ function Counter({ value, prefix = "", suffix }: {
 export function StatsSection() {
   return (
     <section
-      className="relative overflow-hidden border-b border-gray-200/50 bg-[#FAFAF7]"
+      className="relative overflow-hidden"
+      style={{
+        background: "linear-gradient(135deg, #135027 0%, #1E7A3A 50%, #196631 100%)",
+      }}
     >
       {/* Dot texture */}
       <div
         aria-hidden
         className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage: "radial-gradient(circle at 1px 1px, rgba(201,162,39,0.28) 1px, transparent 0)",
+          backgroundImage: "radial-gradient(circle at 1px 1px, rgba(201,162,39,0.18) 1px, transparent 0)",
           backgroundSize: "32px 32px",
         }}
       />
       {/* Top + bottom gold lines */}
-      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gold-400 opacity-40" />
-      <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gold-400 opacity-40" />
+      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gold-400 opacity-50" />
+      <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gold-400 opacity-50" />
 
       <div className="relative container-tight py-14 sm:py-16">
 
         {/* Eyebrow */}
-        {/* Eyebrow */}
-        <SectionEyebrow
-          isMotion
-          motionProps={{
-            initial: { opacity: 0, y: 12 },
-            whileInView: { opacity: 1, y: 0 },
-            viewport: { once: true },
-            transition: { duration: 0.4 }
-          }}
-          className="text-center text-[11px] font-extrabold uppercase tracking-widest text-gold-500 mb-10"
-          diamondClassName="text-gold-550 mr-1.5"
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4 }}
+          className="text-center text-[11px] font-bold uppercase tracking-widest text-gold-300/70 mb-10"
         >
+          <span className="text-gold-400 mr-1.5">◆</span>
           Community impact · by the numbers
-        </SectionEyebrow>
+        </motion.p>
 
-        <div className="md:grid md:grid-cols-2 lg:grid-cols-4 gap-y-10 gap-x-6 sm:gap-x-10">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-y-10 gap-x-6 sm:gap-x-10">
           {STATS.map((stat, i) => (
             <motion.div
               key={stat.label}
@@ -119,12 +117,10 @@ export function StatsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.5, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className={`text-center ${
-                i !== STATS.length - 1 ? "mb-[26px] md:mb-0" : ""
-              }`}
+              className="text-center"
             >
               <p
-                className="font-extrabold tabular-nums text-islamic-600 leading-none"
+                className="font-bold tabular-nums text-white leading-none"
                 style={{ fontSize: "clamp(2.2rem, 4.5vw, 3.5rem)" }}
               >
                 <Counter value={stat.value} prefix={stat.prefix} suffix={stat.suffix} />
@@ -132,13 +128,13 @@ export function StatsSection() {
 
               <div
                 className="mx-auto my-3 h-px w-8"
-                style={{ backgroundColor: "rgba(201,162,39,0.7)" }}
+                style={{ backgroundColor: "rgba(201,162,39,0.55)" }}
               />
 
-              <p className="text-sm font-extrabold text-maroon-500 leading-snug">
+              <p className="text-sm font-bold text-white leading-snug">
                 {stat.label}
               </p>
-              <p className="mt-1 text-xs text-muted/90 leading-relaxed font-semibold">
+              <p className="mt-1 text-xs text-white/50 leading-relaxed">
                 {stat.sub}
               </p>
             </motion.div>
