@@ -92,8 +92,8 @@ export function ContactForm() {
               className={cn(
                 "text-xs font-semibold px-3 py-1.5 rounded border transition-colors",
                 subject === s
-                  ? "bg-islamic-500 text-white border-islamic-500"
-                  : "bg-white text-ink/70 border-gray-200 hover:border-islamic-300 hover:text-islamic-600"
+                  ? "bg-islamic-500 text-white border-islamic-500 hover:border-gold-400 hover:bg-gold-400 hover:text-white"
+                  : "bg-white text-ink/70 border-gray-200 hover:border-gold-400 hover:bg-gold-400 hover:text-white"
               )}
             >
               {s}
@@ -117,7 +117,7 @@ export function ContactForm() {
       {/* Submit */}
       <button
         type="submit"
-        className="w-full flex items-center justify-center gap-2 bg-islamic-500 hover:bg-islamic-600 text-white font-bold py-3.5 rounded text-sm transition-colors"
+        className="w-full flex items-center justify-center gap-2 text-white font-bold py-3.5 rounded-lg text-sm transition-colors bg-[#1F7E3A] hover:bg-[#C9A227]"
       >
         <Send className="h-4 w-4" />
         Send Message

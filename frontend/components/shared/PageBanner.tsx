@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
+import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
 
 export function PageBanner({
   label,
@@ -90,10 +91,15 @@ export function PageBanner({
 
             {/* Eyebrow + title inline */}
             <div className="flex items-baseline gap-3 flex-wrap">
-              <p className="text-[11px] font-bold uppercase tracking-widest text-gold-300 flex-shrink-0 drop-shadow-sm">
+              {/* <p className="text-[11px] font-bold uppercase tracking-widest text-gold-300 flex-shrink-0 drop-shadow-sm">
                 <span className="text-gold-400 mr-1.5">◆</span>
                 {label}
-              </p>
+              </p> */}
+
+              <SectionEyebrow className="text-gold-300 relative -top-[3px]" diamondClassName="text-gold-300 mr-2">
+                {label}
+              </SectionEyebrow>
+
               <h1 className="text-xl sm:text-2xl font-bold text-white leading-tight drop-shadow-sm">
                 {title}
               </h1>
