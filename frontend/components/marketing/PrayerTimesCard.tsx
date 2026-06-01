@@ -38,10 +38,10 @@ function colBg(isNext: boolean, isHovered: boolean, row: "header" | "begins" | "
     return nextMap[row];
   }
   if (isHovered) {
-    const hoverMap = { header: "#196631", begins: "#C5E6D1", adhan: "#E8F5EE", jamat: "#196631" };
+    const hoverMap = { header: "#196631", begins: "#D8F3E5", adhan: "#F0FBF6", jamat: "#196631" };
     return hoverMap[row];
   }
-  const defaultMap = { header: "#0D3C1D", begins: "#E8F5EE", adhan: "#FFFFFF", jamat: "#135027" };
+  const defaultMap = { header: "#0D3C1D", begins: "#F2F9F5", adhan: "#FFFFFF", jamat: "#135027" };
   return defaultMap[row];
 }
 
@@ -65,9 +65,9 @@ export function PrayerTimesSection() {
   return (
     <section
       id="prayer"
-      style={{ background: "linear-gradient(160deg, #135027 0%, #1E7A3A 45%, #196631 100%)" }}
+      className="border-b border-gray-200/50 bg-[#FAFAF7]"
     >
-      <div className="container-tight py-8 sm:py-10">
+      <div className="container-tight py-10 sm:py-12">
 
         {/* ── Section header ── */}
         <motion.div
@@ -75,37 +75,37 @@ export function PrayerTimesSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="flex items-center justify-between gap-4 pb-5 border-b border-white/20"
+          className="flex items-center justify-between gap-4 pb-5 border-b border-gray-200"
         >
           {/* Left: title */}
           <div className="flex-shrink-0">
-            <p className="font-arabic text-gold-300 text-lg" dir="rtl">أوقات الصلاة</p>
-            <h2 className="mt-0.5 text-white text-xl font-bold font-sans">Daily Prayer Times</h2>
+            <p className="font-arabic text-gold-600 text-lg font-bold" dir="rtl">أوقات الصلاة</p>
+            <h2 className="mt-0.5 text-maroon-500 text-xl font-extrabold font-sans">Daily Prayer Times</h2>
           </div>
 
-          {/* Centre: sliding verse marquee — fills the empty space */}
+          {/* Centre: sliding verse marquee */}
           <div
-            className="flex-1 overflow-hidden mx-4 rounded-lg py-2.5 border border-gold-400/20"
-            style={{ background: "rgba(201,162,39,0.07)" }}
+            className="flex-1 overflow-hidden mx-4 rounded-lg py-2.5 border border-gold-300/30"
+            style={{ background: "rgba(201,162,39,0.04)" }}
           >
             <div className="flex items-center animate-marquee whitespace-nowrap hover:[animation-play-state:paused]">
               {[...VERSES, ...VERSES].map((v, i) => (
                 <span key={i} className="inline-flex items-center gap-3 flex-shrink-0 px-6">
-                  <span className="font-arabic text-gold-200 text-base leading-none" dir="rtl">
+                  <span className="font-arabic text-gold-700 text-base leading-none font-semibold" dir="rtl">
                     {v.arabic}
                   </span>
-                  <span className="text-gold-400/50">—</span>
-                  <span className="text-white/55 text-xs italic font-medium">{v.en}</span>
-                  <span className="text-gold-400/25 mx-1">◆</span>
+                  <span className="text-gold-500/40">—</span>
+                  <span className="text-muted text-xs italic font-semibold">{v.en}</span>
+                  <span className="text-gold-500/20 mx-1">◆</span>
                 </span>
               ))}
             </div>
           </div>
 
           {/* Right: date */}
-          <div className="text-right flex-shrink-0">
-            <p className="text-white/75 text-sm">{gregorianDate}</p>
-            <p className="text-gold-300 text-xs mt-0.5">{hijriDate}</p>
+          <div className="text-right flex-shrink-0 font-medium">
+            <p className="text-ink/80 text-sm">{gregorianDate}</p>
+            <p className="text-gold-600 text-xs mt-0.5 font-bold">{hijriDate}</p>
           </div>
         </motion.div>
 
@@ -115,7 +115,7 @@ export function PrayerTimesSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-          className="hidden md:block mt-6 rounded-xl overflow-hidden border-2 border-white/30 shadow-2xl"
+          className="hidden md:block mt-6 rounded-xl overflow-hidden border border-gray-200 shadow-[0_12px_45px_rgba(0,0,0,0.05)]"
         >
           <table className="w-full border-collapse">
 
@@ -123,7 +123,7 @@ export function PrayerTimesSection() {
             <thead>
               <tr>
                 <th className="w-24 px-4 py-5 text-left" style={{ backgroundColor: "#0D3C1D" }}>
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-white/30">Prayer</span>
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-white/40">Prayer</span>
                 </th>
 
                 {displayPrayers.map((p, i) => {
@@ -139,13 +139,13 @@ export function PrayerTimesSection() {
                       transition={{ duration: 0.4, delay: 0.25 + i * 0.08 }}
                       onMouseEnter={() => setHovered(i)}
                       onMouseLeave={() => setHovered(null)}
-                      className="px-4 py-5 text-center border-l-2 border-white/30 cursor-default"
+                      className="px-4 py-5 text-center border-l border-white/10 cursor-default"
                       style={{
                         backgroundColor: colBg(isNext, isHovered, "header"),
                         transition: "background-color 0.25s ease",
                       }}
                     >
-                      <p className={cn("font-arabic text-2xl leading-none", isNext ? "text-ink" : "text-gold-300")} dir="rtl">
+                      <p className={cn("font-arabic text-2xl leading-none", isNext ? "text-ink font-bold" : "text-gold-300")} dir="rtl">
                         {ARABIC[p.name]}
                       </p>
                       <p className={cn("font-bold text-sm uppercase tracking-widest mt-2", isNext ? "text-ink" : "text-white")}>
@@ -167,12 +167,12 @@ export function PrayerTimesSection() {
                 {/* Jummah header */}
                 <th
                   scope="col"
-                  className="px-4 py-5 text-center border-l-4 border-gold-400 w-[160px]"
+                  className="px-4 py-5 text-center border-l border-white/10 w-[160px]"
                   style={{ backgroundColor: "#3d2e0a" }}
                 >
                   <p className="font-arabic text-gold-300 text-2xl leading-none" dir="rtl">{ARABIC["Jummah"]}</p>
                   <p className="font-bold text-sm uppercase tracking-widest mt-2 text-gold-300">Jumu&apos;ah</p>
-                  <p className="text-gold-500/70 text-[10px] mt-1">Every Friday</p>
+                  <p className="text-gold-500/70 text-[10px] mt-1 font-medium">Every Friday</p>
                 </th>
               </tr>
             </thead>
@@ -185,8 +185,8 @@ export function PrayerTimesSection() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.45, delay: 0.5 }}
               >
-                <td className="px-4 py-4 border-t-2 border-white/40" style={{ backgroundColor: "#E8F5EE" }}>
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-islamic-600">Begins</span>
+                <td className="px-4 py-4 border-t border-gray-200 bg-[#E8F5EE]">
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-islamic-700">Begins</span>
                 </td>
                 {displayPrayers.map((p, i) => {
                   const isNext = i === nextIdx;
@@ -194,7 +194,7 @@ export function PrayerTimesSection() {
                   return (
                     <td
                       key={p.name}
-                      className="px-4 py-4 text-center border-t-2 border-l-2 border-[#8ec9aa]"
+                      className="px-4 py-4 text-center border-t border-l border-gray-200/60"
                       onMouseEnter={() => setHovered(i)}
                       onMouseLeave={() => setHovered(null)}
                       style={{ backgroundColor: colBg(isNext, isHov, "begins"), transition: "background-color 0.25s ease" }}
@@ -202,16 +202,16 @@ export function PrayerTimesSection() {
                       <motion.p
                         whileHover={{ scale: 1.1 }}
                         transition={{ duration: 0.15 }}
-                        className={cn("text-base font-semibold tabular-nums", isNext ? "text-gold-700" : "text-islamic-800")}
+                        className={cn("text-base font-bold tabular-nums", isNext ? "text-gold-700" : "text-islamic-850")}
                       >
                         {p.begins}
                       </motion.p>
                     </td>
                   );
                 })}
-                <td className="px-4 py-4 text-center border-t-2 border-l-4 border-gold-400" style={{ backgroundColor: "#FBF6E5" }}>
-                  <p className="text-[9px] font-bold text-gold-500 uppercase tracking-widest mb-0.5">Khutbah</p>
-                  <p className="text-base font-semibold tabular-nums text-gold-700">{jummah.begins}</p>
+                <td className="px-4 py-4 text-center border-t border-l border-gray-200/60" style={{ backgroundColor: "#FBF6E5" }}>
+                  <p className="text-[9px] font-bold text-gold-600 uppercase tracking-widest mb-0.5">Khutbah</p>
+                  <p className="text-base font-bold tabular-nums text-gold-700">{jummah.begins}</p>
                 </td>
               </motion.tr>
 
@@ -222,7 +222,7 @@ export function PrayerTimesSection() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.45, delay: 0.6 }}
               >
-                <td className="px-4 py-4 border-t-2 border-gray-400 bg-white">
+                <td className="px-4 py-4 border-t border-gray-200 bg-white">
                   <span className="text-[10px] font-bold uppercase tracking-widest text-muted">Adhan</span>
                 </td>
                 {displayPrayers.map((p, i) => {
@@ -231,7 +231,7 @@ export function PrayerTimesSection() {
                   return (
                     <td
                       key={p.name}
-                      className="px-4 py-4 text-center border-t-2 border-l-2 border-gray-300"
+                      className="px-4 py-4 text-center border-t border-l border-gray-200/60"
                       onMouseEnter={() => setHovered(i)}
                       onMouseLeave={() => setHovered(null)}
                       style={{ backgroundColor: colBg(isNext, isHov, "adhan"), transition: "background-color 0.25s ease" }}
@@ -239,16 +239,16 @@ export function PrayerTimesSection() {
                       <motion.p
                         whileHover={{ scale: 1.1 }}
                         transition={{ duration: 0.15 }}
-                        className={cn("text-base font-semibold tabular-nums", isNext ? "text-gold-700" : "text-ink")}
+                        className={cn("text-base font-bold tabular-nums", isNext ? "text-gold-700" : "text-ink")}
                       >
                         {p.adhan ?? "—"}
                       </motion.p>
                     </td>
                   );
                 })}
-                <td className="px-4 py-4 text-center border-t-2 border-l-4 border-gold-400 bg-white">
-                  <p className="text-[9px] font-bold text-gold-500 uppercase tracking-widest mb-0.5">Iqamah</p>
-                  <p className="text-base font-semibold tabular-nums text-gold-700">{jummah.adhan}</p>
+                <td className="px-4 py-4 text-center border-t border-l border-gray-200/60 bg-white">
+                  <p className="text-[9px] font-bold text-gold-600 uppercase tracking-widest mb-0.5">Iqamah</p>
+                  <p className="text-base font-bold tabular-nums text-gold-700">{jummah.adhan}</p>
                 </td>
               </motion.tr>
 
@@ -259,7 +259,7 @@ export function PrayerTimesSection() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.45, delay: 0.7 }}
               >
-                <td className="px-4 py-5 border-t-2 border-white/40" style={{ backgroundColor: "#135027" }}>
+                <td className="px-4 py-5 border-t border-gray-200 bg-islamic-800">
                   <span className="text-[10px] font-bold uppercase tracking-widest text-gold-300">Jamat</span>
                 </td>
                 {displayPrayers.map((p, i) => {
@@ -268,7 +268,7 @@ export function PrayerTimesSection() {
                   return (
                     <td
                       key={p.name}
-                      className="px-4 py-5 text-center border-t-2 border-l-2 border-white/30"
+                      className="px-4 py-5 text-center border-t border-l border-white/10"
                       onMouseEnter={() => setHovered(i)}
                       onMouseLeave={() => setHovered(null)}
                       style={{ backgroundColor: colBg(isNext, isHov, "jamat"), transition: "background-color 0.25s ease" }}
@@ -276,15 +276,15 @@ export function PrayerTimesSection() {
                       <motion.p
                         whileHover={{ scale: 1.12 }}
                         transition={{ duration: 0.15 }}
-                        className={cn("text-xl font-bold tabular-nums", isNext ? "text-ink" : "text-white")}
+                        className={cn("text-xl font-extrabold tabular-nums", isNext ? "text-ink" : "text-white")}
                       >
                         {p.jamat ?? "—"}
                       </motion.p>
                     </td>
                   );
                 })}
-                <td className="px-4 py-5 text-center border-t-2 border-l-4 border-gold-400" style={{ backgroundColor: "#3d2e0a" }}>
-                  <p className="text-xl font-bold tabular-nums text-gold-300/40">—</p>
+                <td className="px-4 py-5 text-center border-t border-l border-white/10" style={{ backgroundColor: "#3d2e0a" }}>
+                  <p className="text-xl font-bold tabular-nums text-gold-400/40">—</p>
                 </td>
               </motion.tr>
             </tbody>
@@ -302,33 +302,33 @@ export function PrayerTimesSection() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: i * 0.07 }}
-                className={cn("rounded-xl overflow-hidden border", isNext ? "border-gold-400" : "border-white/15")}
+                className={cn("rounded-xl overflow-hidden border shadow-sm", isNext ? "border-gold-400" : "border-gray-200")}
               >
                 <div className="px-4 py-3 flex items-center justify-between"
                   style={{ backgroundColor: isNext ? "#C9A227" : "#0D3C1D" }}>
                   <div className="flex items-center gap-2.5">
-                    <span className={cn("font-arabic text-lg leading-none", isNext ? "text-ink" : "text-gold-300")} dir="rtl">
+                    <span className={cn("font-arabic text-lg leading-none font-bold", isNext ? "text-ink" : "text-gold-300")} dir="rtl">
                       {ARABIC[p.name]}
                     </span>
                     <p className={cn("font-bold text-sm", isNext ? "text-ink" : "text-white")}>{p.name}</p>
-                    {isNext && <span className="text-[10px] text-ink/70 font-bold">● NEXT</span>}
+                    {isNext && <span className="text-[10px] text-ink/75 font-extrabold">● NEXT</span>}
                   </div>
-                  <p className={cn("font-bold text-lg tabular-nums", isNext ? "text-ink" : "text-white")}>
+                  <p className={cn("font-extrabold text-lg tabular-nums", isNext ? "text-ink" : "text-white")}>
                     {p.jamat ?? p.begins}
                   </p>
                 </div>
-                <div className="grid grid-cols-3 divide-x divide-gray-200 bg-white">
+                <div className="grid grid-cols-3 divide-x divide-gray-150 bg-white">
                   <div className="px-3 py-2.5 text-center">
                     <p className="text-[9px] font-bold text-muted uppercase tracking-widest">Begins</p>
-                    <p className="text-sm font-semibold text-ink tabular-nums mt-0.5">{p.begins}</p>
+                    <p className="text-sm font-bold text-ink tabular-nums mt-0.5">{p.begins}</p>
                   </div>
                   <div className="px-3 py-2.5 text-center">
                     <p className="text-[9px] font-bold text-muted uppercase tracking-widest">Adhan</p>
-                    <p className="text-sm font-semibold text-ink tabular-nums mt-0.5">{p.adhan ?? "—"}</p>
+                    <p className="text-sm font-bold text-ink tabular-nums mt-0.5">{p.adhan ?? "—"}</p>
                   </div>
-                  <div className="px-3 py-2.5 text-center" style={{ backgroundColor: "#135027" }}>
+                  <div className="px-3 py-2.5 text-center bg-islamic-800">
                     <p className="text-[9px] font-bold text-gold-300 uppercase tracking-widest">Jamat</p>
-                    <p className="text-sm font-bold text-white tabular-nums mt-0.5">{p.jamat ?? "—"}</p>
+                    <p className="text-sm font-extrabold text-white tabular-nums mt-0.5">{p.jamat ?? "—"}</p>
                   </div>
                 </div>
               </motion.div>
@@ -339,23 +339,23 @@ export function PrayerTimesSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: 0.4 }}
-            className="rounded-xl overflow-hidden border-2 border-gold-400"
+            className="rounded-xl overflow-hidden border border-gold-500 shadow-sm"
           >
             <div className="px-4 py-3 flex items-center justify-between" style={{ backgroundColor: "#3d2e0a" }}>
               <div className="flex items-center gap-2.5">
-                <span className="font-arabic text-gold-300 text-lg leading-none" dir="rtl">{ARABIC["Jummah"]}</span>
+                <span className="font-arabic text-gold-300 text-lg leading-none font-bold" dir="rtl">{ARABIC["Jummah"]}</span>
                 <p className="font-bold text-sm text-gold-300">Jumu&apos;ah — Every Friday</p>
               </div>
-              <p className="font-bold text-lg tabular-nums text-gold-300">{jummah.adhan}</p>
+              <p className="font-extrabold text-lg tabular-nums text-gold-300">{jummah.adhan}</p>
             </div>
-            <div className="grid grid-cols-2 divide-x divide-gold-200" style={{ backgroundColor: "#FBF6E5" }}>
+            <div className="grid grid-cols-2 divide-x divide-gold-200/40" style={{ backgroundColor: "#FBF6E5" }}>
               <div className="px-3 py-2.5 text-center">
-                <p className="text-[9px] font-bold text-gold-500 uppercase tracking-widest">Khutbah</p>
-                <p className="text-sm font-semibold text-gold-700 tabular-nums mt-0.5">{jummah.begins}</p>
+                <p className="text-[9px] font-bold text-gold-550 uppercase tracking-widest">Khutbah</p>
+                <p className="text-sm font-bold text-gold-700 tabular-nums mt-0.5">{jummah.begins}</p>
               </div>
               <div className="px-3 py-2.5 text-center">
-                <p className="text-[9px] font-bold text-gold-500 uppercase tracking-widest">Iqamah</p>
-                <p className="text-sm font-semibold text-gold-700 tabular-nums mt-0.5">{jummah.adhan}</p>
+                <p className="text-[9px] font-bold text-gold-550 uppercase tracking-widest">Iqamah</p>
+                <p className="text-sm font-bold text-gold-700 tabular-nums mt-0.5">{jummah.adhan}</p>
               </div>
             </div>
           </motion.div>
@@ -367,13 +367,13 @@ export function PrayerTimesSection() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.8 }}
-          className="mt-5 pt-4 border-t border-white/20 flex flex-wrap items-center justify-between gap-4"
+          className="mt-6 pt-4 border-t border-gray-200 flex flex-wrap items-center justify-between gap-4"
         >
-          <a href="#" className="flex items-center gap-2 text-white/65 hover:text-white text-sm transition-colors">
+          <a href="#" className="flex items-center gap-2 text-islamic-700 hover:text-islamic-850 text-sm font-semibold transition-colors">
             <Download className="h-4 w-4 flex-shrink-0" />
             Download Prayer Timetable PDF
           </a>
-          <Link href="/prayer-times" className="flex items-center gap-2 text-gold-300 hover:text-gold-200 text-sm font-medium transition-colors">
+          <Link href="/prayer-times" className="flex items-center gap-2 text-gold-600 hover:text-gold-700 text-sm font-bold transition-colors">
             <Calendar className="h-4 w-4 flex-shrink-0" />
             View Full Month Calendar
           </Link>

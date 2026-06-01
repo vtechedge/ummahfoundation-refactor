@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ShieldCheck, Receipt, Users } from "lucide-react";
+import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
 import { campaigns, CHARITY_BN } from "@/lib/mock-data";
 import { formatCurrency, formatNumber } from "@/lib/utils";
 import { cn } from "@/lib/utils";
@@ -37,10 +38,10 @@ export function DonationSection() {
   const pct = Math.min(100, Math.round((campaign.raisedAmount / campaign.goalAmount) * 100));
 
   const [category, setCategory] = useState<Category>("Mosque Fund");
-  const [preset, setPreset]     = useState<number | null>(100);
-  const [custom, setCustom]     = useState("");
-  const [monthly, setMonthly]   = useState(false);
-  const [slide, setSlide]       = useState(0);
+  const [preset, setPreset] = useState<number | null>(100);
+  const [custom, setCustom] = useState("");
+  const [monthly, setMonthly] = useState(false);
+  const [slide, setSlide] = useState(0);
 
   useEffect(() => {
     const t = setInterval(() => setSlide((s) => (s + 1) % SLIDES.length), 4_500);
@@ -54,12 +55,12 @@ export function DonationSection() {
 
       {/* ══ Hadith opening — spiritual context before the ask ══ */}
       <div
-        className="relative overflow-hidden px-6 sm:px-10 py-14 sm:py-18 text-center"
-        style={{ background: "linear-gradient(160deg, #135027 0%, #1E7A3A 50%, #196631 100%)" }}
+        className="relative overflow-hidden px-6 sm:px-10 py-14 sm:py-16 text-center border-b border-white/10"
+        style={{ background: "#4E0C17" }}
       >
-        {/* Very subtle repeating star pattern — almost invisible */}
+        {/* Subtle repeating star pattern */}
         <div
-          aria-hidden className="absolute inset-0 opacity-[0.07]"
+          aria-hidden className="absolute inset-0 opacity-[0.08]"
           style={{
             backgroundImage: "radial-gradient(circle at 2px 2px, #C9A227 1.5px, transparent 0)",
             backgroundSize: "40px 40px",
@@ -67,41 +68,45 @@ export function DonationSection() {
         />
         {/* Soft gold radial glow */}
         <div
-          aria-hidden className="absolute inset-0"
-          style={{ background: "radial-gradient(ellipse 60% 60% at 50% 50%, rgba(201,162,39,0.12), transparent)" }}
+          aria-hidden className="absolute inset-0 opacity-5 pointer-events-none"
+          style={{
+            backgroundImage:
+              "repeating-linear-gradient(45deg, #fff 0, #fff 1px, transparent 0, transparent 50%)",
+            backgroundSize: "20px 20px",
+          }}
         />
 
         <div className="relative container-tight">
-          <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-gold-300/70 mb-6">
-            <span className="mr-2">◆</span>Sahih Muslim 533
-          </p>
+          <SectionEyebrow className="text-gold-300/80">
+            Sahih Muslim 533
+          </SectionEyebrow>
 
-          {/* Arabic — the centrepiece, large and golden */}
+          {/* Arabic — glowing gold, large and readable */}
           <p
             dir="rtl"
-            className="font-arabic text-gold-200 leading-[1.8] mb-5"
+            className="font-arabic text-gold-200 font-bold leading-[1.8] mb-5"
             style={{ fontSize: "clamp(1.4rem, 3.8vw, 2.6rem)" }}
           >
             مَنْ بَنَىٰ مَسْجِدًا لِلَّهِ بَنَى اللَّهُ لَهُ بَيْتًا فِي الْجَنَّةِ
           </p>
 
-          <p className="font-sans italic text-cream/80 text-base sm:text-lg max-w-lg mx-auto leading-relaxed">
+          <p className="font-sans italic text-white/90 text-base sm:text-lg max-w-lg mx-auto leading-relaxed font-semibold">
             &ldquo;Whoever builds a masjid for Allah, Allah will build for him a house in Paradise.&rdquo;
           </p>
-          <p className="mt-2 text-sm text-white/40">— The Prophet Muhammad ﷺ</p>
+          <p className="mt-2 text-sm text-white/50 font-medium">— The Prophet Muhammad ﷺ</p>
 
           {/* Trust signals */}
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-white/45">
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2.5 text-xs text-white/70 font-semibold">
             <span className="flex items-center gap-1.5">
-              <ShieldCheck className="h-3.5 w-3.5 text-gold-300/60" />
+              <ShieldCheck className="h-4 w-4 text-gold-300/70" />
               Registered Charity · BN: {CHARITY_BN}
             </span>
             <span className="flex items-center gap-1.5">
-              <Receipt className="h-3.5 w-3.5 text-gold-300/60" />
+              <Receipt className="h-4 w-4 text-gold-300/70" />
               CRA-approved tax receipts
             </span>
             <span className="flex items-center gap-1.5">
-              <Users className="h-3.5 w-3.5 text-gold-300/60" />
+              <Users className="h-4 w-4 text-gold-300/70" />
               {campaign.donors}+ donors · since 2011
             </span>
           </div>
@@ -112,7 +117,7 @@ export function DonationSection() {
       <div className="grid lg:grid-cols-[3fr_2fr]">
 
         {/* ── Left: full-height auto-sliding image panel with campaign overlay ── */}
-        <div className="relative overflow-hidden min-h-[420px] lg:min-h-[600px]" style={{ backgroundColor: "#135027" }}>
+        <div className="relative overflow-hidden min-h-[420px] lg:min-h-[600px]" style={{ backgroundColor: "#FAFAF7" }}>
 
           {/* Slide images */}
           {SLIDES.map((s, i) => (
@@ -141,7 +146,7 @@ export function DonationSection() {
                 aria-label={`Slide ${i + 1}`}
                 className={cn(
                   "rounded-full transition-all duration-300",
-                  i === slide ? "w-6 h-2 bg-gold-300" : "w-2 h-2 bg-white/40 hover:bg-white/70"
+                  i === slide ? "w-6 h-2 bg-gold-400 shadow-sm" : "w-2 h-2 bg-white/60 hover:bg-white/95 shadow-sm"
                 )}
               />
             ))}
@@ -151,12 +156,12 @@ export function DonationSection() {
         {/* Donation form — warm ivory, clean */}
         <div
           id="donate-form"
-          className="flex flex-col justify-center px-8 sm:px-10 py-10"
+          className="flex flex-col justify-center px-8 sm:px-10 py-10 border-t-[2px] border-gold-400/40"
           style={{ backgroundColor: "#FAFAF7" }}
         >
-          <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-islamic-600 mb-2">
-            <span className="text-gold-400 mr-2">◆</span>Give today
-          </p>
+          <SectionEyebrow className="text-islamic-600">
+            Give today
+          </SectionEyebrow>
           <h3 className="font-sans font-semibold text-xl text-ink mb-7">Make your donation</h3>
 
           {/* Category */}
@@ -168,10 +173,10 @@ export function DonationSection() {
                   key={cat}
                   onClick={() => setCategory(cat)}
                   className={cn(
-                    "py-2 text-xs font-semibold rounded-sm border transition-colors",
+                    "py-2 text-xs font-semibold rounded-lg border transition-colors duration-200",
                     category === cat
-                      ? "bg-islamic-700 text-white border-islamic-700"
-                      : "bg-white text-ink/70 border-gray-200 hover:border-islamic-300"
+                      ? "bg-[#1F7E3A] border-[#1F7E3A] text-white hover:bg-[#C9A227] hover:border-[#C9A227]"
+                      : "bg-white text-ink/70 border-gray-200 hover:border-[#C9A227] hover:bg-[#C9A227] hover:text-white"
                   )}
                 >
                   {cat}
@@ -189,10 +194,10 @@ export function DonationSection() {
                   key={amt}
                   onClick={() => { setPreset(amt); setCustom(""); }}
                   className={cn(
-                    "py-2 text-sm font-bold rounded-sm border transition-colors",
+                    "py-2 text-sm font-bold rounded-lg border transition-colors duration-200",
                     preset === amt && !custom
-                      ? "bg-islamic-700 text-white border-islamic-700"
-                      : "bg-white text-ink border-gray-200 hover:border-islamic-300"
+                      ? "bg-[#1F7E3A] border-[#1F7E3A] text-white hover:bg-[#C9A227] hover:border-[#C9A227]"
+                      : "bg-white text-ink border-gray-200 hover:border-[#C9A227] hover:bg-[#C9A227] hover:text-white"
                   )}
                 >
                   {formatCurrency(amt * 100)}
@@ -201,10 +206,10 @@ export function DonationSection() {
               <button
                 onClick={() => setPreset(null)}
                 className={cn(
-                  "py-2 text-sm font-bold rounded-sm border transition-colors",
+                  "py-2 text-sm font-bold rounded-lg border transition-colors duration-200",
                   !preset || custom
-                    ? "bg-islamic-700 text-white border-islamic-700"
-                    : "bg-white text-ink border-gray-200 hover:border-islamic-300"
+                    ? "bg-[#1F7E3A] border-[#1F7E3A] text-white hover:bg-[#C9A227] hover:border-[#C9A227]"
+                    : "bg-white text-ink border-gray-200 hover:border-[#C9A227] hover:bg-[#C9A227] hover:text-white"
                 )}
               >
                 Custom
@@ -216,7 +221,7 @@ export function DonationSection() {
                 <input
                   type="number" min="1" placeholder="Enter amount" value={custom}
                   onChange={(e) => { setCustom(e.target.value); setPreset(null); }}
-                  className="w-full pl-7 pr-3 py-2 border border-gray-300 rounded-sm text-sm focus:outline-none focus:border-islamic-500"
+                  className="w-full pl-7 pr-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-islamic-500"
                 />
               </div>
             )}
@@ -233,7 +238,9 @@ export function DonationSection() {
             <span className="text-sm text-ink/75">Make this a monthly pledge</span>
           </label>
 
-          <button className="w-full bg-islamic-700 hover:bg-islamic-800 text-white font-bold py-3.5 rounded-sm text-sm transition-colors">
+          <button
+            className="w-full bg-[#1F7E3A] hover:bg-[#C9A227] text-white font-bold py-3.5 rounded-lg text-sm transition-all duration-200 hover:shadow-md"
+          >
             Donate {displayAmount} · {category}
           </button>
           <p className="mt-3 text-center text-[10px] text-muted/60">
